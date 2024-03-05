@@ -1,8 +1,9 @@
 from dcim.graphql.types import ComponentObjectType
-from extras.graphql.mixins import ConfigContextMixin
+from extras.graphql.mixins import ConfigContextMixin, ContactsMixin
 from ipam.graphql.mixins import IPAddressesMixin, VLANGroupsMixin
 from netbox.graphql.types import OrganizationalObjectType, NetBoxObjectType
 from virtualization import filtersets, models
+
 
 __all__ = (
     'ClusterType',
@@ -38,7 +39,7 @@ class ClusterTypeType(OrganizationalObjectType):
         filterset_class = filtersets.ClusterTypeFilterSet
 
 
-class VirtualMachineType(ConfigContextMixin, NetBoxObjectType):
+class VirtualMachineType(ConfigContextMixin, ContactsMixin, NetBoxObjectType):
 
     class Meta:
         model = models.VirtualMachine
